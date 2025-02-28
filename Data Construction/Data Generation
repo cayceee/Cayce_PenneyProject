@@ -1,0 +1,99 @@
+### DATA GENERATION ###
+
+# FUNCTIONS #
+
+import numpy as np
+import random
+from datetime import datetime as dt
+from typing import Callable
+import os
+
+
+
+DEBUG = True
+def debugger_factory(show_args=True) -> Callable:
+    def debugger(func:Callable) -> Callable:
+        if DEBUG:
+            def wrapper(*args, **kwargs):
+                if show_args:
+                    print(f'{func.__name__} was called with:')
+                    print('Positional arguments:\n', args)
+                    print('Keyword arguments:\n', kwargs)
+
+                t0 = dt.now()
+                results = func(*args, **kwargs)
+                print(f'{func.__name__} ran for {dt.now()-t0}')
+                return results
+        else:
+            return func
+        return wrapper
+    return debugger
+
+
+
+def initial_deck(n = 26):
+  """
+  Creates the initial, unshuffled deck, with 0's and 1's representing black and red cards.
+  The values of the cards are arbitrary with respect to the game.
+  The deck is returned as 'initial_deck', a list.
+  """
+  initial_deck = [0]*n + [1]*n
+  return initial_deck
+
+
+
+def resetSeed():
+  """
+  Resets the random seed and returns the new current seed as 'ranstate', a tuple representing the seed.
+  Using the 'random.setstate()' function, the seed can be set by filling in the function with the 'ranstate' tuple.
+  """
+
+  random.seed(None)
+  ranstate = random.getstate()
+  return ranstate
+
+
+
+def saveRanstate(ranState, filename, directory = 'systemStates'):
+
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+
+    file_path = os.path.join(directory, filename)
+
+    with open(file_path, 'w') as file:
+        file.write(str(ranState))
+
+
+
+
+@debugger_factory()
+
+
+
+def makeDecks(v = 100000):
+    """
+    Makes a v amount of decks, set to 100,000 by default.
+    Presents 'decks' as a tuple of the deck lists.
+    """
+    decks = []
+    for i in range(v):
+      newDeck = initial_deck()
+      random.shuffle(newDeck)
+      decks.append(newDeck)
+
+    return decks
+
+
+
+
+# Sample Main for Code Generation
+
+ranstate = resetSeed()
+
+decks = makeDecks()
+print(decks[0])
+print(decks[99999])
+print(ranstate)
+
+saveRanstate(ranstate, 'testingRan.txt')
