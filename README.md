@@ -1,12 +1,17 @@
 # PenneyProject
 
-The code's primary goal is to run a monte carlo style simulation of Penney's Game with a deck of cards. Penney's game is a card game that involves a trick that drastically increases the chances of the second player winning, if the player knows the trick. This code simulates the ratio in which each player wins, given player 2 knows the trick. 
+The code's primary goal is to run a monte carlo style simulation of Penney's Game with a deck of cards. Penney's game is a coin game where each player picks a sequence of three values, either heads or tails. The players then flip the coin until the last three flips makeup one of the player's sequences, with that player getting a point. The simulation runs a version of this game with cards, and used black and red instead of heads and tails. The game involves a trick that drastically increases the chances of the second player winning, if the player knows the trick.
 
-An objective of this code is an ability to store the series of random decks created for reproducibility. In this code, this is done by storing the system state as a tuple, as produced by the function random.getstate(). The code is therefore split into two different files, "Data Generation and Storage" creates a random series of decks as a tuple, and produces the system state that made these decks as a tuple. The system state is stored on the local directory as a txt file, to be copied and pasted into the "Running the Simulation File," which then runs the simulation given a tuple of decks and produces the results and a visualization. 
+An objective of this code is an ability to store the series of random decks created for reproducibility. In this code, this is done by storing the system state as a tuple that is stored to a json for each running of the code. 
 
-**Data Generation and Storage:**
-The first code file is used to create a random tuple of shuffled decks and saves the state that made these decks as a tuple, saving it as a txt file. To do this, the code first clears the system state, and then sets a "random one." This code is to be run if you desire to run the simulation with a completely new and random set of decks. This code does not do any simulation itself. 
+## DataGeneration.py
 
-**Running the Simulation:**
-Once you have a tuple of the system state, either through running "Data Generation and Storage" or through trying to reproduce the results of a previous simulation run, the system state tuple from the txt file is to be copied and pasted into the "Running the Simulation Code" at the "newState" variable. This sets the system state to the state you want it to run in, then runs the simulation and produces the results and visualization. 
+The first code file is used to create the decks and saves the state that made these decks as a tuple, saving it as a json file. To do this, the code first clears the system state, and then sets a given state before storing the data. This code is to be run if you desire to run the simulation with a completely new and random set of decks. This code does not do any processing itself. 
 
+## Processing.py
+
+Takes a generated series of decks to repeatedly play through the game and saves the results. Each possible combination of sequences is tested and the results, most notable the win percentages are stored. 
+
+## Visualization.py
+
+Provides a heatmap of the results collected from 
