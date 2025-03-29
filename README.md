@@ -1,4 +1,4 @@
-# Cayce_PenneyProject
+# PenneyProject
 
 The code's primary goal is to run a monte carlo style simulation of Penney's Game with a deck of cards. Penney's game is a card game that involves a trick that drastically increases the chances of the second player winning, if the player knows the trick. This code simulates the ratio in which each player wins, given player 2 knows the trick. 
 
