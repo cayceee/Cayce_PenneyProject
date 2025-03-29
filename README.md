@@ -14,4 +14,8 @@ Takes a generated series of decks to repeatedly play through the game and saves 
 
 ## Visualization.py
 
-Provides a heatmap of the results collected from 
+Provides a heatmap of the results collected from processing file. Two Heatmaps are created, one where the game is scored by the amount of tricks won, and another where the game is score by your total amount of cards won. 
+
+## main.py
+
+Runs the code. Produces results for both versions of scoring. 
